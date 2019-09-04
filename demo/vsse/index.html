@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Achieve Efficient and Verifiable Conjunctive and Fuzzy Queries over Encrypted Data in Cloud</title>
+</head>
+
+<body data-spy="scroll" data-target="#nav" data-offset="1">
+    <div id="nav" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#abstract" data-toggle="tooltip" data-placement="left"
+            title="Abstract"></a>
+        <a class="list-group-item list-group-item-action" href="#model" data-toggle="tooltip" data-placement="left"
+            title="Model and Design Goals"></a>
+        <a class="list-group-item list-group-item-action" href="#index" data-toggle="tooltip" data-placement="left"
+            title="Index Structure"></a>
+        <a class="list-group-item list-group-item-action" href="#search-performance" data-toggle="tooltip"
+            data-placement="left" title="Search Performance"></a>
+        <a class="list-group-item list-group-item-action" href="#pc-performance" data-toggle="tooltip"
+            data-placement="left" title="Verification Performance on PC"></a>
+        <a class="list-group-item list-group-item-action" href="#sp-performance" data-toggle="tooltip"
+            data-placement="left" title="Verification Performance on Smartphone"></a>
+        <a class="list-group-item list-group-item-action" href="#demo" data-toggle="tooltip" data-placement="left"
+            title="Demo Download"></a>
+    </div>
+
+    <div class="container-fluid">
+
+        <header class="row">
+            <h2 class="col-md-7 offset-md-1" style="padding: 30px 0;">
+                <a href="https://doi.org/10.1109/TSC.2019.2924372" target="_blank">
+                    Achieve Efficient and Verifiable Conjunctive and<br />Fuzzy Queries over Encrypted Data in Cloud
+                    <span class="icon icon-external-link" src="img/external-link.svg"
+                        style="vertical-align: super;margin-right: 5px; height: 12px; width: 12px;">
+                </a>
+            </h2>
+            <ul class="col-md-8 offset-md-1 authors">
+                <li><a href="https://junshao81.github.io" target="_blank">Jun Shao</a><sup>a, b</sup></li>
+                <li><a href="http://www.cs.unb.ca/~rlu1/" target="_blank">Rongxing Lu</a><sup>b</sup></li>
+                <li>Yunguo Guan<sup>a</sup></li>
+                <li>Guiyi Wei<sup>a</sup></li>
+            </ul>
+            <ol class="col-md-8 offset-md-1 author_deps">
+                <li>Department of Information Security, Zhejiang Gongshang University, Hangzhou, China 310018</li>
+                <li>Faculty of Computer Science, University of New Brunswick, Fredericton, Canada E3B 5A3</li>
+            </ol>
+        </header>
+
+        <section class="abstract row" id="abstract">
+
+            <h3 class="col-md-8 offset-md-1">Abstract</h3>
+
+            <p class="col-md-9 offset-md-1 lead">
+                Due to the high demands of searchability over encrypted data, searchable encryption (SE) has recently
+                received considerable attention and been widely suggested in encrypted cloud storage. Typically, the
+                cloud server is assumed to be honest-but-curious in most SE-based cloud storage systems, i.e., the cloud
+                server should follow the protocol to return valid and complete search results to users. However, this
+                trust assumption is not always true due to some unanticipated situations, such as misconfigurations and
+                malfunctions. Therefore, the function of verifiability of search results becomes crucial for the success
+                of SE-based cloud storage systems. For this reason, many verifiable SE schemes have been proposed;
+                however, they either fail to support query operators “<span class="symbol">OR</span>”, “<span
+                    class="symbol">AND</span>”, “<span class="symbol">∗</span>” and “<span class="symbol">?</span>”
+                simultaneously, or require many time-consuming operations. Aiming at addressing this problem, in this
+                paper, we propose a new verifiable SE scheme for encrypted cloud storage. The proposed scheme is
+                characterized by integrating various techniques, i.e., bitmap index, radix tree, format preserving
+                encryption, keyed-hash message authentication code and symmetric key encryption, for achieving efficient
+                and verifiable conjunctive and fuzzy queries over encrypted data in the cloud. Detailed security
+                analysis shows that our proposed scheme holds the confidentiality of data and verifiability of search
+                results at the same time. In addition, extensive experiments are conducted, and the results demonstrate
+                our proposed scheme is efficient and suitable for users to retrieve their data from the cloud to their
+                mobile devices.
+            </p>
+        </section>
+
+        <section class="row" id="model">
+            <h3 class="col-md-9 offset-md-1"><a name="model">Model and Design Goal</a></h3>
+            <img class="col-md-8 offset-md-2" src="img/system-model.png">
+            <img class="col-md-6 offset-md-3" style="margin-top: 30px;" src="img/design-goal.png">
+        </section>
+
+        <section class="row" id="index">
+            <h3 class="col-md-9 offset-md-1">Index Structure</h3>
+
+            <img class="col-md-6 offset-md-3" src="img/tree.png">
+            <img class="col-md-6 offset-md-3" src="img/nodes.png">
+
+        </section>
+
+        <section class="row" id="search-performance">
+            <h3 class="col-md-9 offset-md-1">Search Performance</h3>
+            <img class="col-md-8 offset-md-2" src="img/search_performance.png">
+        </section>
+
+        <section class="row" id="pc-performance">
+            <h3 class="col-md-9 offset-md-1">Verification Performance on PC</h3>
+            <img class="col-md-8 offset-md-2" src="img/pc_performance.png">
+        </section>
+
+
+        <section class="row" id="sp-performance">
+            <h3 class="col-md-9 offset-md-1">Verification Performance on Smartphone</h3>
+            <img class="col-md-8 offset-md-2" src="img/smartphone_performance.png">
+        </section>
+
+
+        <section class="row" id="demo">
+            <h3 class="col-md-9 offset-md-1">Demo download</h3>
+            <p class="col-md-9 offset-md-1">The sourcecode of this project can be found at <a
+                    style="text-decoration: underline; " href="https://github.com/guanyg/vsse" target="_blank"><span
+                        class="icon icon-github" style="height: 14px;"></span>guanyg/vsse</a>.</p>
+        </section>
+
+        <footer style="text-align: center;">
+            <img src="img/end.png" style="margin: 0 auto;">
+        </footer>
+    </div>
+
+
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+
+</html>
