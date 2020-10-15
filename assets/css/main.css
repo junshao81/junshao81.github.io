@@ -2070,7 +2070,7 @@
 /* Type */
 
 	body, input, select, textarea {
-		color: #7f888f;
+		color: #4c4c4c;
 		font-family: "Open Sans", sans-serif;
 		font-size: 13pt;
 		font-weight: 400;
@@ -2137,8 +2137,8 @@
 		color: #3d4449;
 		font-family: "Roboto Slab", serif;
 		font-weight: 700;
-		line-height: 1.5;
-		margin: 0 0 1em 0;
+		line-height: 1.8;
+		margin: 0 0 0 0;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -3364,7 +3364,7 @@
 		@media screen and (max-width: 1680px) {
 
 			.posts article {
-				width: calc(50% - 6em);
+				width: calc(20% - 6em);
 			}
 
 				.posts article:nth-last-child(3) {
@@ -3485,7 +3485,7 @@
 
 		#main > .inner {
 			padding: 0 6em 0.1em 6em ;
-			margin: 0 auto;
+			margin: 0 0;
 			max-width: 110em;
 		}
 
@@ -3505,7 +3505,7 @@
 			}
 
 				#main > .inner > section {
-					padding: 5em 0 3em 0 ;
+					padding: 1em 0 0em 0 ;
 				}
 
 		}
@@ -3605,15 +3605,15 @@
 
 			#sidebar > .inner > * {
 				border-bottom: solid 2px rgba(210, 215, 217, 0.75);
-				margin: 0 0 3.5em 0;
-				padding: 0 0 3.5em 0;
+				margin: 0 0 1.5em 0;
+				padding: 0 0 1.5em 0;
 			}
 
 				#sidebar > .inner > * > :last-child {
 					margin-bottom: 0;
 				}
 
-				#sidebar > .inner > *:last-child {
+		 		#sidebar > .inner > *:last-child {
 					border-bottom: 0;
 					margin-bottom: 0;
 					padding-bottom: 0;
@@ -3624,7 +3624,7 @@
 				border-bottom: 0;
 				margin: -2.22222em 0 4.44444em -2.22222em;
 				padding: 2.22222em;
-				width: calc(100% + 4.44444em);
+				width: calc(100% + 111.44444em);
 			}
 
 		#sidebar .toggle {
@@ -3637,7 +3637,7 @@
 			border: 0;
 			display: block;
 			height: 7.5em;
-			left: 26em;
+			left: 13em;
 			line-height: 7.5em;
 			outline: 0;
 			overflow: hidden;
@@ -3662,7 +3662,7 @@
 				content: '\f0c9';
 				font-size: 2rem;
 				height: inherit;
-				left: 0;
+				left: 0px;
 				line-height: inherit;
 				position: absolute;
 				text-indent: 0;
@@ -3677,12 +3677,12 @@
 		@media screen and (max-width: 1680px) {
 
 			#sidebar {
-				width: 24em;
+				width: 20em;
 			}
 
 				#sidebar > .inner {
 					padding: 1.66667em 1.66667em 1.33333em 1.66667em ;
-					width: 24em;
+					width: 20em;
 				}
 
 					#sidebar > .inner > .alt {
@@ -3693,7 +3693,7 @@
 
 				#sidebar .toggle {
 					height: 6.25em;
-					left: 24em;
+					left: 21em;
 					line-height: 6.25em;
 					text-indent: 5em;
 					width: 5em;
@@ -3704,7 +3704,7 @@
 					}
 
 				#sidebar.inactive {
-					margin-left: -24em;
+					margin-left: -20em;
 				}
 
 		}
@@ -3816,10 +3816,10 @@
 			text-align: right;
 		}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (max-width: 1680px){
 
 			#header {
-				padding-top: 5em;
+				padding-top: 1.7em;
 			}
 
 		}
@@ -3982,7 +3982,8 @@
 			color: inherit;
 			cursor: pointer;
 			display: block;
-			font-size: 0.9em;
+			font-size: 1em;
+			font-weight: 700;
 			padding: 0.625em 0;
 		}
 
@@ -4017,7 +4018,7 @@
 					color: #9fa3a6;
 					content: '\f078';
 					position: absolute;
-					right: 0;
+					right: 12px;
 				}
 
 				#menu ul a.opener:hover:before, #menu ul span.opener:hover:before {
