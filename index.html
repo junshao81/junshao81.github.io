@@ -9,6 +9,57 @@
 		<title>Jun SHAO</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<style>
+			body {
+			  font-family: "Lato", sans-serif;
+			}
+
+			.sidenav {
+			  height: 100%;
+			  width: 0;
+			  position: fixed;
+			  z-index: 1;
+			  top: 0;
+			  left: 0;
+			  background-color: #111;
+			  overflow-x: hidden;
+			  transition: 0.5s;
+			  padding-top: 60px;
+			}
+
+			.sidenav a {
+			  padding: 8px 8px 8px 32px;
+			  text-decoration: none;
+			  font-size: 25px;
+			  color: #818181;
+			  display: block;
+			  transition: 0.3s;
+			}
+
+			.sidenav a:hover {
+			  color: #f1f1f1;
+			}
+
+			.sidenav .closebtn {
+			  position: absolute;
+			  top: 0;
+			  right: 25px;
+			  font-size: 36px;
+			  margin-left: 50px;
+			}
+
+			#main {
+			  transition: margin-left .5s;
+			  padding: 16px;
+			}
+
+			@media screen and (max-height: 450px) {
+			  .sidenav {padding-top: 15px;}
+			  .sidenav a {font-size: 18px;}
+			}
+		</style>
+
+
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
@@ -89,8 +140,9 @@
 			</div>
 
 			<!-- Sidebar -->
-			<div id="sidebar">
-				<div class="inner">
+			<div id="mySidenav" class="sidenav">
+			  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			  <div class="inner">
 					<!-- Menu -->
 					<nav id="menu">
 						<header class="major">
@@ -126,14 +178,55 @@
 				</div>
 			</div>
 
+			<!--
+			<div id="sidebar">
+				<div class="inner">
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="index.html">ABOUT ME</a></li>
+							<li><a href="whatsnew.html">WHAT’S NEW</a></li>
+							<li>
+								<span class="opener">PUBLICATIONS</span>
+								<ul>
+									<li><a href="journal.html">JOURNAL</a></li>
+									<li><a href="conference.html">CONFERENCE</a></li>
+								</ul>
+							</li>
+							<li><a href="demo.html">DEMO</a></li>
+							<li><a href="supervision.html">SUPERVISION</a></li>
+							<li><a href="http://scie-staff.zjgsu.edu.cn/jshao/">中文主页</a></li>
+						</ul>
+					</nav>
+					<footer id="footer">
+						<p>This template comes from Prof. Hui ZHU's <a href="https://www.xdzhuhui.com/" style="font-weight: bold">Homepage.</a> Thanks him for allowing me to use it.</p>
+					</footer>
+						
+					
+					<script type="text/javascript" src="//codice.shinystat.com/cgi-bin/getcod.cgi?USER=Jungithub"></script>
+					<noscript>
+					<h6><a href="http://www.shinystat.com">
+					<img src="//www.shinystat.com/cgi-bin/shinystat.cgi?USER=Jungithub" alt="Free counters" style="border:0px" /></a></h6>
+					</noscript>
+
+				</div>
+			</div>-->
+
 		</div>
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/skel.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-		<script src="assets/js/main.js"></script>
+		<script>
+			function openNav() {
+				document.getElementById("mySidenav").style.width = "250px";
+				document.getElementById("main").style.marginLeft = "250px";
+			}
+
+			function closeNav() {
+				document.getElementById("mySidenav").style.width = "0";
+				document.getElementById("main").style.marginLeft= "0";
+			}
+		</script>
 
 	</body>
 </html>
