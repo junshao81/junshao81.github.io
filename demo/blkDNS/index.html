@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- 必须的 meta 标签 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="./css/reset.css"> -->
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <title>A Domain Name Management System Based on Account-based Consortium Blockchain</title>
+  </head>
+  <body>
+    <div id="nav" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#abstract" data-toggle="tooltip" data-placement="left"
+            title="Abstract"></a>
+        <a class="list-group-item list-group-item-action" href="#model" data-toggle="tooltip" data-placement="left"
+            title="Model and Design Goals"></a>
+        <a class="list-group-item list-group-item-action" href="#accounts-structure" data-toggle="tooltip" data-placement="left"
+            title="Accounts Structure"></a>
+        <a class="list-group-item list-group-item-action" href="#life-circle" data-toggle="tooltip"
+            data-placement="left" title="Life Circle of Domain Names"></a>
+        <a class="list-group-item list-group-item-action" href="#performance" data-toggle="tooltip"
+            data-placement="left" title="Performance Evaluation"></a>
+        <a class="list-group-item list-group-item-action" href="#demo" data-toggle="tooltip" data-placement="left"
+            title="Demo Download"></a>
+    </div>
+
+    <div class="container-fliud">
+        <header class="flex-wrap py-3">
+            <h2 class="col-md-7 offset-md-1" style="padding: 30px 0;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                    <span>A Domain Name Management System Based<br/> on Account-based Consortium Blockchain
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                            <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                        </svg>
+                    
+                    </span>
+                    
+                </a>
+            </h2>
+            <ul class="col-md-8 offset-md-1 authors">
+                <li>Genhua Lu<sup>a</sup></li>
+                <li>Xiaofeng Jia<sup>a</sup></li>
+                <li>Yi Zhang<sup>a</sup></li>
+                <li>Jun Shao<sup>a</sup></li>
+                <li>Guiyi Wei<sup>b</sup></li>
+            </ul>
+            <ol class="col-md-8 offset-md-1 author_deps">
+                <li>School of Computer and Information Engineering, Zhejiang Gongshang University, Hangzhou, China 310018</li>
+                <li>School of Information and Electronic Engineering, ZhejiangGongshangUniversity, Hangzhou, China 310018</li>
+            </ol>
+        </header>
+
+        <section class="abstract row" id="abstract">
+            <h3 class="col-md-8 offset-md-1">Abstract</h3>
+            <p class="col-md-9 offset-md-1 lead text">
+                Domain Name System (DNS) is a critical component of the Internet's running due to its functionality to map domain names to IP addresses. However, many criticisms go to the current DNS mainly because of its centralized architecture that may cause a single point of failure or power abuse. Many works suggest using the decentralization property of the blockchain to solve the problem. Nevertheless, the existing blockchain-based DNSs cannot support the whole life cycle of domain names or protect the privacy of the domain name users' funds. In this paper, aiming at addressing these problems, we propose a domain name management system by integrating some advanced cryptographic primitives, such as commitment and zero-knowledge proof, and an account-based blockchain system with the anonymous fund. Besides the expected properties, our proposal guarantees fairness in the domain name registration and transfer processes, i.e., all the users have the same probability of obtaining the domain name along the time dimension. We implement a prototype of our proposal, including the underlying account-based blockchain and the related smart contracts. The extensive experimental results conduct that our proposal is (relatively) efficient and effective.
+            </p>
+        </section>
+
+        <section class="row" id="model">
+            <h3 class="col-md-9 offset-md-1"><a name="model">Model and Design Goals</a></h3>
+            <img class="col-md-8 offset-md-2" src="./img/system-model.jpg">
+            <div class="col-md-6 offset-md-3">
+                <h4 style="padding: 20px 0;">Model</h4>
+                <ul>
+                    We have <b>two</b> kinds of entities in this paper: <br>
+                    <ol>
+                        <li>
+                            An account-based consortium blockchain with anonymous funds;
+                        </li>
+                        <li>
+                            Many domain name users;
+                        </li>
+                    </ol>
+                    <p class="text">
+                        The <b>domain name users</b> can register, sell/buy, renew and update domain names with the helper of our blockchain system. And the domain name owner in the figure is also adomain name user that owns atleast one domain name.
+                    </p>
+                </ul>
+            </div>
+            <div class="col-md-6 offset-md-3">
+                <h4 style="padding: 20px 0;">Design Goals</h4>
+                <ol>
+                    <li class="text">Design a domain name management system based on account-based consortium blockchain, which is used for the entire life cycle of the domain names (registration, transfer, update, and renewal). And we utilize the Vickrey auction to register and transfer domain names.</li>
+                    <li>The proposed system should be <b>fair</b> in the registration and transfer.</li>
+                    <li class="text">The proposed system should <b>protect</b> the value of users' <b>fund</b> in the whole life circle of the domain names.</li>
+                    <li class="text">The proposed system should <b>guarantee</b> the users have enough coins to cover their <b>payments</b> in the registration, transfer, and renewal.</li>
+                    <li>The proposed system should be <b>relatively efficient</b>.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="row" id="accounts-structure">
+            <h3 class="col-md-9 offset-md-1">Account Structure in Our Account-Based Consortium Blockchain</h3>
+            <img class="col-md-6 offset-md-3" src="img/accounts-structure.png">
+        </section>
+
+        <section class="row" id="life-circle">
+            <h3 class="col-md-9 offset-md-1">Life Circle of Domain Names</h3>
+            <img class="col-md-6 offset-md-3" src="img/life-cycle.png">
+        </section>
+
+        <section class="row" id="performance">
+            <h3 class="col-md-9 offset-md-1">Performance Evaluation</h3>
+            <!-- 轮播 -->
+            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <!-- 轮播图片 -->
+            <div id="carouselExampleControlsNoTouching" class="carousel slide col-md-6 offset-md-3" data-bs-touch="false" data-bs-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./img/Off-chain-Cost.png" class="d-block w-100">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./img/On-chain-Cost.png" class="d-block w-100">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./img/Finalize.png" class="d-block w-100">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="row" id="demo">
+            <h3 class="col-md-9 offset-md-1">Demo download</h3>
+            <p class="col-md-9 offset-md-1">The sourcecode of this prototype can be found at
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                  </svg> 
+                <a style="text-decoration: underline; " href="https://github.com/EmmaLu-ux/paperDemo" target="_blank">
+                    <span class="icon icon-github" style="height: 14px;"></span>
+                    EmmaLu-ux/paperDemo</a>.
+            </p>
+        </section>
+
+        <!-- <footer style="text-align: center;">
+            <img src="img/end.png" style="margin: 0 auto;">
+        </footer> -->
+    </div>
+    
+
+    <!-- 选项 1：包含 Popper 的 Bootstrap 集成包 -->
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
