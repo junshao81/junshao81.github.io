@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Anonymous Multi-Hop Payment for Payment Channel Networks</title>
+</head>
+
+<body data-spy="scroll" data-target="#nav" data-offset="1" style="background:#F0F8FF">
+    <div id="nav" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#abstract" data-toggle="tooltip" data-placement="left"
+            title="Abstract"></a>
+        <a class="list-group-item list-group-item-action" href="#definition" data-toggle="tooltip" data-placement="left"
+            title="Definition and Security Goals"></a>
+        <a class="list-group-item list-group-item-action" href="#AMHL" data-toggle="tooltip" data-placement="left"
+            title="AMHL+ Scheme"></a>
+        <a class="list-group-item list-group-item-action" href="#EAMHL" data-toggle="tooltip" data-placement="left"
+            title="EAMHL+ Scheme"></a>
+        <a class="list-group-item list-group-item-action" href="#Performance" data-toggle="tooltip"
+            data-placement="left" title="Performance Evaluation"></a>
+        <a class="list-group-item list-group-item-action" href="#demo" data-toggle="tooltip" data-placement="left"
+            title="Demo Download"></a>
+    </div>
+
+    <div class="container-fluid">
+
+        <header class="row">
+            <h2 class="col-md-7 offset-md-1" style="padding: 30px 0;">
+                <a href="https://junshao81.github.io/demo/AMHP/index.html" target="_blank">
+                    Anonymous Multi-Hop Payment for Payment Channel Networks
+                    <span class="icon icon-external-link" src="res/external-link.svg"
+                        style="vertical-align: super;margin-right: 5px; height: 12px; width: 12px;">
+                </a>
+            </h2>
+            <ul class="col-md-8 offset-md-1 authors">
+                <li>Yi Zhang<sup>a</sup></li>
+                <li>Xiaofeng Jia<sup>a</sup></li>
+                <li>Bianjing Pan<sup>a</sup></li>
+                <li><a href="https://junshao81.github.io" target="_blank">Jun Shao</a><sup>a</sup></li>
+                <li>Liming Fang <sup>b</sup></li>
+                <li><a href="http://www.cs.unb.ca/~rlu1/" target="_blank">Rongxing Lu</a><sup>c</sup></li>
+                <li>Guiyi Wei<sup>d</sup></li>
+            </ul>
+            <ol class="col-md-8 offset-md-1 author_deps">
+                <li>School of Computer and Information Engineering, Zhejiang Gongshang University, Hangzhou, China 310018</li>
+                <li>Shenzhen Research Institute, Nanjing University of Aeronautics and Astronautics, Shenzhen, China 518038</li>
+                <li>Faculty of Computer Science, University of New Brunswick, Fredericton, Canada E3B 5A3</li>
+                <li>School of Information and Electronic Engineering, Zhejiang Gongshang  University, Hangzhou, China 310018</li>
+            </ol>
+        </header>
+
+        <section class="abstract row" id="abstract" style="background:#3b719f;text-align: justify; line-height: 1.5">
+
+            <h3 class="col-md-8 offset-md-1">Abstract</h3>
+
+            <p class="col-md-9 offset-md-1 lead">
+                The tremendous success of blockchain technology has been witnessed in recent years. Nevertheless, scalability is still
+                the main criticism of using the blockchain. To alleviate this problem, many solutions with different properties have been put forth, and
+                Payment Channel Networks (PCNs) have flourished as one of the most promising solutions due to the high TPS (transactions per
+                second). Unfortunately, the existing PCN solutions either fail to provide path privacy guarantees or require the not-always-true All-Anonymous-Connected assumption (i.e., an anonymous communication channel always exists for any two participants). To alleviate
+                these problems, we first present a new cryptographic primitive named anonymous multi-hop payment (AMHP), which is an improvement
+                of anonymous multi-hop lock (AMHL). Using AMHP and payment channels together, we can have a new PCN solution with path privacy
+                but removing the All-Anonymous-Connected assumption. After that, we present the first AMHP scheme, called AMHL+, by adapting
+                the generic construction of AMHL, but at the cost of high communication overhead. To reduce the communication cost, we further
+                present a new AMHP scheme (named EAMHL+) using the bilinear pairing. The communication cost of the EAMHL+ is reduced by
+                92.3% compared to the AMHL+. The rigorous security analysis demonstrates that the EAMHL+ holds consistency, balance security, and
+                path privacy. Finally, we implement the proposed AMHP schemes using Java. The extensive experimental results show that, though the
+                EAMHL+ requires more computational cost than the AMHL+, it is more efficient than the latter in terms of communication overhead.
+            </p>
+        </section>
+
+        <section class="row" id="definition">
+            <h3 class="col-md-9 offset-md-1"><a name="definition">Definition and Security Goals</a></h3>
+             <div class="col-md-6 offset-md-3">
+                <h4 style="padding: 20px 0;">Definition</h4>
+                 <ol>
+                <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Setup:</b> The payee $U_n$ generates a puzzle $Puzzle$ and sends it to the payer $U_0$ while keeping the corresponding solution $Solution$ secret.</li>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Lock:</b> This phase starts from $U_0$, who takes $Puzzle$ and $sk_0$ as input and outputs a lock $L_0$ for $U_1$.
+                        For the user $U_i$, $i\in [1,n-1]$, he/she takes $(L_{i-1},sk_i)$ as input and outputs a lock $L_i$ for $U_{i+1}$,
+                        where $sk_i$, a random secret chosen by the user $U_i$, is an optional input.</li>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Release:</b> This phase starts from $U_n$, who takes $L_{n-1}$ and $Solution$ as input and returns a release $R_n$ to $U_{n-1}$.
+                        For the user $U_i$, $i\in [n-1,1]$, he/she takes $(L_{i},R_{i+1},sk_i)$ as input and returns a release $R_i$ to $U_{i-1}$.
+                        As that in the Lock phase, $sk_i$ is also an optional input.</li>
+                     </ol>
+            </div>
+            <div class="col-md-6 offset-md-3">
+                <h4 style="padding: 20px 0;">Security Goals</h4>
+                <ol>
+                <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Consistency:</b> The lock $L_i$ can be released if its following lock $L_{i+1}$ has already been released.</li>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Balance security:</b> An honest intermediate user does not lose coins, even if all other users are corrupted.</li>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Path privacy:</b> All intermediate users only know the information of their neighboring nodes and cannot obtain information about all other nodes.</li>
+                    </ol>
+            </div>
+        </section>
+
+        <section class="row" id="AMHL">
+            <h3 class="col-md-9 offset-md-1"><a name="AMHL">AMHL+ Scheme</a></h3>
+            <div class="col-md-10 offset-md-1">
+                <br /><br />
+                <img src="img/AMHL+.png" class="col-md-10 offset-md-1"><br /><br />
+            </div>
+        </section>
+
+        <section class="row" id="EAMHL">
+            <h3 class="col-md-9 offset-md-1"><a name="EAMHL">EAMHL+ Scheme</a></h3>
+            <div class="col-md-10 offset-md-1">
+                <br /><br />
+                <img src="img/EAMHL+.png" class="col-md-10 offset-md-1"><br /><br />
+            </div>
+        </section>
+
+        <section class="row" id="Performance">
+            <h3 class="col-md-9 offset-md-1"><a name="Performance">Performance Evaluation</a></h3>
+            <img class="col-md-5 offset-md-1" src="img/communication.png" style="width:200px">
+            <img class="col-md-5 offset-md-0" src="img/time.png" style="width:200px">
+        </section>
+
+
+        <section class="row" id="demo">
+            <h3 class="col-md-9 offset-md-1"><a name="demo">Demo download</a></h3>
+            <p class="col-md-9 offset-md-1" style="font-size:18px">The sourcecode of this project can be found at <a
+                    style="text-decoration: underline; " href="https://github.com/YiZhang0302/AMHP_DEMO"
+                    target="_blank"><span class="icon icon-github"
+                        style="height: 14px;"></span>YiZhang0302/AMHP_DEMO</a>.</p>
+        </section>
+
+        <footer style="text-align: center;">
+            <img src="res/end.png" style="margin: 0 auto;">
+        </footer>
+    </div>
+
+
+    <script src="res/jquery-3.3.1.slim.min.js"></script>
+    <script src="res/popper.min.js"></script>
+    <script src="res/bootstrap.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+
+</html>
