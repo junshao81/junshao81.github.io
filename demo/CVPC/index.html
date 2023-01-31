@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./res/bootstrap.min.css">
+    <link rel="stylesheet" href="./res/index.css">
+    <title>Cross-Chain Virtual Payment Channels</title>
+</head>
+
+<body data-spy="scroll" data-target="#nav" data-offset="1">
+    <div id="nav" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#abstract" data-toggle="tooltip" data-placement="left"
+            title="Abstract"></a>
+        <a class="list-group-item list-group-item-action" href="#definitions" data-toggle="tooltip" data-placement="left"
+            title="Definitions"></a>
+        <a class="list-group-item list-group-item-action" href="#goals" data-toggle="tooltip" data-placement="left"
+            title="Security and Efficiency Goals"></a>
+        <a class="list-group-item list-group-item-action" href="#protocol" data-toggle="tooltip" data-placement="left"
+            title="Cross-chain virtual payment channel protocol"></a>
+        <a class="list-group-item list-group-item-action" href="#performance" data-toggle="tooltip"
+            data-placement="left" title="Performance Evaluation"></a>
+        <a class="list-group-item list-group-item-action" href="#demo" data-toggle="tooltip" data-placement="left"
+            title="Demo Download"></a>
+    </div>
+
+    <div class="container-fluid">
+
+        <header class="row">
+            <h2 class="col-md-7 offset-md-1" style="padding: 30px 0;">
+                <!-- <a href="https://doi.org/10.1109/TSC.2021.3054772" target="_blank"> -->
+                    Cross-Chain Virtual Payment Channels
+                    <span class="icon icon-external-link" src="res/external-link.svg"
+                        style="vertical-align: super;margin-right: 5px; height: 12px; width: 12px;">
+                </a>
+            </h2>
+            <ul class="col-md-8 offset-md-1 authors">
+                <li>Zhe Yu<sup>a</sup></li>
+                <li>Xiaofeng Jia<sup>a</sup></li>
+                <li><a href="https://junshao81.github.io" target="_blank">Jun Shao, <i>Senior Member</i></a><sup>a</sup></li>
+                <li><a href="http://www.cs.unb.ca/~rlu1/" target="_blank">Rongxing Lu, <i>IEEE
+                            Fellow</i></a><sup>b</sup></li>
+                <li>Guiyi Wei<sup>c</sup></li>
+                <li>Zhenguang Liu<sup>a</sup></li>
+            </ul>
+            <ol class="col-md-8 offset-md-1 author_deps">
+                <li>School of Computer and Information Engineering, Zhejiang Gongshang University, Hangzhou, China
+                    310018</li>
+                <li>Faculty of Computer Science, University of New Brunswick, Fredericton, Canada E3B5A3</li>
+                <li>School of Information and Electronic Engineering, Zhejiang Gongshang University, Hangzhou, China
+                    310018</li>
+            </ol>
+        </header>
+
+        <section class="abstract row" id="abstract" style="background:#3b719f;text-align: justify; line-height: 1.5">
+
+            <h3 class="col-md-8 offset-md-1">Abstract</h3>
+
+            <p class="col-md-9 offset-md-1 lead">
+                With the emergence of countless independent blockchain systems in recent years, cross-chain transactions have attracted considerable 
+                attention, and lots of solutions have been put forth by both industry and academia. However, most of existing solutions suffer from 
+                either centralization or scalability issues. To mitigate these issues, in this paper, we propose the concept of cross-chain virtual 
+                payment channels, which allows two users in different blockchain systems to conduct limitless off-chain transactions with the help 
+                of an intermediate node, hence solving the centralization and scalability issues. Furthermore, as the intermediate node is only 
+                involved in the channel open and close operations, it further improves the efficiency of cross-chain transactions, and to a certain 
+                extent, it even enhances the privacy of the cross-chain transaction. Meanwhile, we also present the first concrete cross-chain 
+                virtual payment channel scheme, which only requires one of the blockchain systems supporting the Turing-complete scripting language. 
+                The corresponding detailed security analysis in the Universal Composability framework demonstrates that our proposal holds the 
+                Consensus on Open, Update, and Close. Finally, we implement and deploy our cross-chain virtual payment channel scheme on the 
+                Ethereum and Bitcoin test networks. The extensive experimental results show that our proposal dramatically improves the efficiency 
+                of cross-chain transactions, and the advantage becomes more pronounced as the number of transactions increases.
+            </p>
+        </section>
+
+        <section class="row" id="definitions">
+            <h3 class="col-md-9 offset-md-1"><a name="model">Definitions</a></h3>
+            <img class="col-md-6 offset-md-3" src="res/3.1-Cross-chain_Virtual_Channel.png">
+
+            <div class="col-md-6 offset-md-3">
+                <!-- <h4 style="padding: 20px 0;">Design Goals</h4> -->
+                <p>
+                    There are three participants in our cross-chain virtual payment channel. We name them Alice, Ingrid, and Bob for the easy 
+                    description. Alice and Bob have coins/accounts only in blockchain systems $B_1$ and $B_2$, respectively. At the same time, 
+                    Ingrid shares a payment channel with Alice and Bob in blockchain systems $B_1$ and $B_2$, respectively. Our cross-chain virtual 
+                    payment channel can allow Alice and Bob to perform limitless transactions off-chain. Unlike payment channels, we have the 
+                    following four kinds of operations in cross-chain virtual payment channels, namely <b>Open</b>, <b>Update</b>, <b>Close</b>, 
+                    and <b>Offload</b>.
+                </p>
+                <ul>
+                    <li> <b>Open:</b> Suppose Ingrid has payment channels $\alpha$ and $\beta$ in two blockchain systems with Alice and Bob, 
+                        respectively. Alice and Bob create the cross-chain virtual payment channel $\gamma$ based on $\alpha$ and $\beta$ with 
+                        the help of Ingrid.</li>
+                    <li> <b>Update:</b> $\gamma.Alice$ and $\gamma.Bob$ perform instant off-chain transactions by updating the state of $\gamma$.</li>
+                    <li> <b>Close:</b> $\gamma.Alice$, $\gamma.Ingrid$, and $\gamma.Bob$ reach a consensus on the final state of $\gamma$. With this 
+                        final state, $\gamma.Ingrid$ updates payment channels $\alpha$ and $\beta$ with $\gamma.Alice$ and $\gamma.Bob$, respectively. 
+                        After that, the cross-chain virtual payment channel $\gamma$ is closed.</li>
+                    <li> <b>Offload:</b> $\gamma.Alice$, $\gamma.Ingrid$, and $\gamma.Bob$ execute the offload procedure when some dispute happens in 
+                        other operations of the channel $\gamma$. $\gamma.Ingrid$ closes payment channels $\alpha$ and $\beta$ with $\gamma.Alice$ and 
+                        $\gamma.Bob$, respectively. Furthermore, the cross-chain virtual payment channel $\gamma$ will be closed and become a payment 
+                        channel in one of the underlying blockchain systems. In the end, the dishonest participant of $\gamma$ will be punished.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="row" id="goals">
+            <h3 class="col-md-9 offset-md-1">Security and Efficiency Goals</h3>
+                
+            <div class="col-md-6 offset-md-3">
+                    <h4 style="padding: 20px 0;">Security Goals</h4>
+                    <p>
+                        Since the cross-chain virtual payment channel is essentially a payment channel that has not been published on the blockchain, 
+                        it must have the security properties of the payment channel, including
+                    </p>
+                    <ul>
+                        <li> <b>Consensus-Open.</b> A channel can only be successfully opened when Alice, Bob, and Ingrid reach a consensus on the 
+                            open of the channel.</li>
+                        <li> <b>Consensus-Update.</b> The state update of the channel needs to be approved by Alice and Bob.</li>
+                        <li> <b>Consensus-Close.</b> A channel can only be successfully closed when honest users agree on the consequence of the 
+                            closure, and dishonest users are penalized.</li>
+                    </ul>
+                    <h4 style="padding: 20px 0;">Efficiency goals</h4>
+                    <p>
+                        As the existing virtual payment channel schemes, cross-chain virtual payment channels should also satisfy the following 
+                        efficiency goals in terms of communication rounds.
+                    </p>
+                    <ul>
+                        <li> <b>Efficiency-Open.</b> Constant round opening: Successful open of a cross-chain virtual payment channel $\gamma$ takes 
+                            a constant number of rounds.</li>
+                        <li> <b>Efficiency-Update.</b> Optimistic updating: For the channel $\gamma$, this property guarantees that a channel update 
+                            takes a constant number of rounds if $\gamma.Alice$ and $\gamma.Bob$ are honest.</li>
+                        <li> <b>Efficiency-Close.</b> Optimistic closing: When all participants in the channel $\gamma$ are honest, the closing of 
+                            $\gamma$ takes a constant number of rounds.</li>
+                    </ul>
+                    <p>
+                        Property <b>Efficiency-Update</b> applies to all kinds of off-chain channels, including payment channels, virtual payment 
+                        channels, and our proposed cross-chain virtual payment channels. Furthermore, in the optimistic case, all the operations 
+                        in (cross-chain) virtual payment channel are executed off-chain.
+                    </p>
+            </div>
+        </section>
+
+        <section class="row" id="protocol">
+            <h3 class="col-md-9 offset-md-1">Cross-chain virtual payment channel protocol</h3>
+            <div class="col-md-10 offset-md-1">
+                <img src="res/4-Cross-chain_Virtual_Channel_Protocol_1.png" class="col-md-6 offset-md-3">
+            </div>
+        </section>
+
+        <section class="row" id="performance">
+            <h3 class="col-md-9 offset-md-1"><a name="Performance">Performance Evaluation</a></h3>
+            <img class="col-md-5 offset-md-1" src="res/6-Performance_Evaluation-Communication.png" style="width:200px">
+            <img class="col-md-5 offset-md-0" src="res/6-Performance_Evaluation-Time.png" style="width:200px">
+        </section>
+
+
+        <section class="row" id="demo">
+            <h3 class="col-md-9 offset-md-1">Demo download</h3>
+            <p class="col-md-9 offset-md-1">The sourcecode of this project can be found at <a
+                    style="text-decoration: underline; " href="https://github.com/Yzyzzzz23/Cross-chain_Virtual_Payment_Channel-Code"
+                    target="_blank"><span class="icon icon-github"
+                        style="height: 14px;"></span>github.com/Yzyzzzz23/Cross-chain_Virtual_Payment_Channel-Code</a>.</p>
+        </section>
+
+        <footer style="text-align: center;">
+            <img src="res/end.png" style="margin: 0 auto;">
+        </footer>
+    </div>
+
+
+    <script src="res/jquery-3.3.1.slim.min.js"></script>
+    <script src="res/popper.min.js"></script>
+    <script src="res/bootstrap.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+
+</html>
