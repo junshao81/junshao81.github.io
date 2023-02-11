@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./res/bootstrap.min.css">
+    <link rel="stylesheet" href="./res/index.css">
+    <title>Public Key Encryption with Public-Verifiable Decryption Delegation</title>
+</head>
+
+<body data-spy="scroll" data-target="#nav" data-offset="1" style="background:#F0F8FF">
+    <div id="nav" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#abstract" data-toggle="tooltip" data-placement="left"
+            title="Abstract"></a>
+        <a class="list-group-item list-group-item-action" href="#definition" data-toggle="tooltip" data-placement="left"
+            title="Definition and Security Goals"></a>
+        <a class="list-group-item list-group-item-action" href="#AMHL" data-toggle="tooltip" data-placement="left"
+            title="AMHL+ Scheme"></a>
+        <a class="list-group-item list-group-item-action" href="#EAMHL" data-toggle="tooltip" data-placement="left"
+            title="EAMHL+ Scheme"></a>
+        <a class="list-group-item list-group-item-action" href="#Performance" data-toggle="tooltip"
+            data-placement="left" title="Performance Evaluation"></a>
+        <a class="list-group-item list-group-item-action" href="#demo" data-toggle="tooltip" data-placement="left"
+            title="Demo Download"></a>
+    </div>
+
+    <div class="container-fluid">
+
+        <header class="row">
+            <h2 class="col-md-7 offset-md-1" style="padding: 30px 0;">
+                <a href="https://junshao81.github.io/demo/AMHL/index.html" target="_blank">
+                    Public Key Encryption with Public-Verifiable Decryption Delegation
+                    <!-- Anonymous Multi-Hop Payment for Payment <br \> Channel Networks -->
+                    <span class="icon icon-external-link" src="res/external-link.svg"
+                        style="vertical-align: super;margin-right: 5px; height: 12px; width: 12px;">
+                </a>
+            </h2>
+            <ul class="col-md-8 offset-md-1 authors">
+                <li> Xin Hou <sup>a</sup></li>
+                <li> Xiaofeng Jia <sup>a</sup></li>
+                <li><a href="https://junshao81.github.io" target="_blank">Jun Shao</a><sup>a</sup></li>
+                
+            </ul>
+            <ol class="col-md-8 offset-md-1 author_deps">
+                <li>School of Computer and Information Engineering, Zhejiang Gongshang University, Hangzhou, China 310018</li>
+            </ol>
+        </header>
+
+        <section class="abstract row" id="abstract" style="background:#3b719f;text-align: justify; line-height: 1.5">
+
+            <h3 class="col-md-8 offset-md-1">Abstract</h3>
+
+            <p class="col-md-9 offset-md-1 lead">
+                We introduce a new cryptographic primitive called public key encryption with public-verifiable decryption delegation ($PKE$-$PVD^2$), which allows the original decryptor to transmit the decryption key for a specific ciphertext to a designated recipient in a public-verifiable and privacy-preserving way. Due to its public-verifiable and ciphertext-level decryption delegation, it is helpful in the scenario requiring the special decryption delegation. For instance, the court needs to retrieve the specific message from the ciphertext as significant judgment evidence. Furthermore, by using the bilinear pairing, we present the first $PKE$-$PVD^2$ scheme and the corresponding security proof in the random oracle model. We also give a prototype of the proposal, and the extensive experimental results demonstrate the effectiveness and efficiency of our proposal.
+            </p>
+        </section>
+
+        <section class="row" id="definition">
+            <h3 class="col-md-9 offset-md-1"><a name="definition">Definition</a></h3>
+             <div class="col-md-6 offset-md-3">
+                <!-- <h4 style="padding: 20px 0;">Definition</h4> -->
+                 <ol>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>  $Setup(\lambda)\rightarrow Para$</b>: It takes a security parameter $\lambda$ as input and outputs the system parameter $Para$.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b> 
+	$KeyGen(Para) \rightarrow (pk,sk)$</b>: It takes the system parameter $Para$ as input and outputs a public/private key pair $(pk,sk)$.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b> 
+	$Enc(pk_o, m) \rightarrow C$</b>: It takes the original decryptor's public key $pk_o$ and the message $m$ in the message space as input and outputs a ciphertext $C$ of $m$.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$PrfGen(sk_r,C)\rightarrow R$</b>: It takes the designated recipient's private key $sk_r$ and the ciphertext $C$ as input and outputs the transmission request $R$ on $c_1$.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$PrfVrf(pk_r,C,R) \rightarrow 1/0$</b>: It takes the designated recipient's public key $pk_r$, the ciphertext $C$, and the transmission request $R$ as input and outputs $1$ if $R$ is a valid transmission request on $c_1$, or $0$ otherwise.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$AuthGen(sk_o,R) \rightarrow A$</b>: It takes the original decryptor's private key $sk_o$ and the transmission request $R$ as input and outputs the authorization information $A$ on $c_1$ if $PrfVrf(pk_r,C,R) \rightarrow 1$.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$AuthVrf(pk_o,R,A) \rightarrow 1/0$</b>: It takes the original decryptor's public key $pk_o$, the transmission request $R$, and the authorization information $A$ as input and outputs $1$ if $A$ is a valid authorization information on $c_1$, or $0$ otherwise.
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$Dec_o(sk_o,C) \rightarrow  m$</b>: It takes the original decryptor's private key $sk_o$ and the ciphertext $C$ as input and outputs the message $m$ or a special reject symbol $\perp$ denoted failure.	
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$Dec_r(sk_r,C,A) \rightarrow  m$</b>: It takes the designated recipient's private key $sk_r$, the ciphertext $C$, and the authorization information $A$ as input and outputs the message $m$ or a special reject symbol $\perp$ denoted failure.	
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$Sign(sk_o,m) \rightarrow  \sigma$</b>: It takes the original decryptor's private key $sk_o$ and the message $m$ in the message space as input and outputs the signature $\sigma$ for $m$.	
+	
+	<li style="text-align: justify; line-height: 1.5; font-size:18px"><b>
+	$Vrfy(pk_o,m,\sigma) \rightarrow 1/0$</b>: It takes the original decryptor's public key $pk_o$, the message $m$, and the signature $\sigma$ as input and outputs $1$ if $\sigma$ is a valid signature for $m$, or $0$ otherwise.
+
+
+                
+            </div>
+            <!-- <div class="col-md-6 offset-md-3">
+                <h4 style="padding: 20px 0;">Correctness</h4>
+                <ol>
+                <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Consistency:</b> The lock $L_i$ can be released if its following lock $L_{i+1}$ has already been released.</li>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Balance security:</b> An honest intermediate user does not lose coins, even if all other users are corrupted.</li>
+                    <li style="text-align: justify; line-height: 1.5; font-size:18px"><b>Path privacy:</b> All intermediate users only know the information of their neighboring nodes and cannot obtain information about all other nodes.</li>
+                    </ol>
+            </div> -->
+        </section>
+
+
+        <section class="row" id="Performance">
+            <h3 class="col-md-9 offset-md-1"><a name="Performance">Performance Evaluation</a></h3>
+            <!-- <img class="col-md-5 offset-md-1" src="img/communication.png" style="width:200px"> -->
+            <img class="col-md-10 offset-md-1" src="img/cost2.jpg" style="width:600px>
+        </section>
+
+
+        <section class="row" id="demo">
+            <h3 class="col-md-9 offset-md-1"><a name="demo">Demo download</a></h3>
+            <p class="col-md-9 offset-md-1" style="font-size:18px">The sourcecode of this project can be found at <a
+                    style="text-decoration: underline; " href="https://github.com/Archer-One/PKEPVDD_DEMO"
+                    target="_blank"><span class="icon icon-github"
+                        style="height: 14px;"></span>Archer-One/PKEPVDD_DEMO</a>.</p>
+        </section>
+
+        <footer style="text-align: center;">
+            <img src="res/end.png" style="margin: 0 auto;">
+        </footer>
+    </div>
+
+
+    <script src="res/jquery-3.3.1.slim.min.js"></script>
+    <script src="res/popper.min.js"></script>
+    <script src="res/bootstrap.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+
+</html>
