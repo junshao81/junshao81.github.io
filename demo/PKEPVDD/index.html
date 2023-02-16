@@ -62,37 +62,37 @@
             <div class="col-md-6 offset-md-3">
                 <!-- <h4 style="padding: 20px 0;">Design Goals</h4> -->
                 <ul>
-                    <li><b>  $Setup(\lambda)\rightarrow Para$</b>: It takes a security parameter $\lambda$ as input and outputs the system parameter $Para$.</li>
+                    <li><b>  Setup$(\lambda)\rightarrow Para$</b>: It takes a security parameter $\lambda$ as input and outputs the system parameter $Para$.</li>
 	
                     <li><b> 
-                        $KeyGen(Para) \rightarrow (pk,sk)$</b>: It takes the system parameter $Para$ as input and outputs a public/private key pair $(pk,sk)$.</li>
+                        KeyGen$(Para) \rightarrow (pk,sk)$</b>: It takes the system parameter $Para$ as input and outputs a public/private key pair $(pk,sk)$.</li>
                         
                     <li><b> 
-                        $Enc(pk_o, m) \rightarrow C$</b>: It takes the original decryptor's public key $pk_o$ and the message $m$ in the message space as input and outputs a ciphertext $C$ of $m$.</li>
+                        Enc$(pk_o, m) \rightarrow C$</b>: It takes the original decryptor's public key $pk_o$ and the message $m$ in the message space as input and outputs a ciphertext $C$ of $m$.</li>
                         
                         <li><b>
-                        $PrfGen(sk_r,C)\rightarrow R$</b>: It takes the designated recipient's private key $sk_r$ and the ciphertext $C$ as input and outputs the transmission request $R$ on $c_1$.</li>
+                        PrfGen$(sk_r,C)\rightarrow R$</b>: It takes the designated recipient's private key $sk_r$ and the ciphertext $C$ as input and outputs the transmission request $R$ on $c_1$.</li>
                         
                         <li><b>
-                        $PrfVrf(pk_r,C,R) \rightarrow 1/0$</b>: It takes the designated recipient's public key $pk_r$, the ciphertext $C$, and the transmission request $R$ as input and outputs $1$ if $R$ is a valid transmission request on $c_1$, or $0$ otherwise.</li>
+                        PrfVrf$(pk_r,C,R) \rightarrow 1/0$</b>: It takes the designated recipient's public key $pk_r$, the ciphertext $C$, and the transmission request $R$ as input and outputs $1$ if $R$ is a valid transmission request on $c_1$, or $0$ otherwise.</li>
                         
                         <li><b>
-                        $AuthGen(sk_o,R) \rightarrow A$</b>: It takes the original decryptor's private key $sk_o$ and the transmission request $R$ as input and outputs the authorization information $A$ on $c_1$ if $PrfVrf(pk_r,C,R) \rightarrow 1$.</li>
+                        AuthGen$(sk_o,R) \rightarrow A$</b>: It takes the original decryptor's private key $sk_o$ and the transmission request $R$ as input and outputs the authorization information $A$ on $c_1$ if <b>PrfVrf$(pk_r,C,R) \rightarrow 1$</b>.</li>
                         
                         <li><b>
-                        $AuthVrf(pk_o,R,A) \rightarrow 1/0$</b>: It takes the original decryptor's public key $pk_o$, the transmission request $R$, and the authorization information $A$ as input and outputs $1$ if $A$ is a valid authorization information on $c_1$, or $0$ otherwise.</li>
+                        AuthVrf$(pk_o,R,A) \rightarrow 1/0$</b>: It takes the original decryptor's public key $pk_o$, the transmission request $R$, and the authorization information $A$ as input and outputs $1$ if $A$ is a valid authorization information on $c_1$, or $0$ otherwise.</li>
                         
                         <li><b>
-                        $Dec_o(sk_o,C) \rightarrow  m$</b>: It takes the original decryptor's private key $sk_o$ and the ciphertext $C$ as input and outputs the message $m$ or a special reject symbol $\perp$ denoted failure.</li>	
+                        Dec<sub>o</sub>$(sk_o,C) \rightarrow  m$</b>: It takes the original decryptor's private key $sk_o$ and the ciphertext $C$ as input and outputs the message $m$ or a special reject symbol $\perp$ denoted failure.</li>	
                         
                         <li><b>
-                        $Dec_r(sk_r,C,A) \rightarrow  m$</b>: It takes the designated recipient's private key $sk_r$, the ciphertext $C$, and the authorization information $A$ as input and outputs the message $m$ or a special reject symbol $\perp$ denoted failure.</li>	
+                        Dec<sub>r</sub>$(sk_r,C,A) \rightarrow  m$</b>: It takes the designated recipient's private key $sk_r$, the ciphertext $C$, and the authorization information $A$ as input and outputs the message $m$ or a special reject symbol $\perp$ denoted failure.</li>	
                         
                         <li><b>
-                        $Sign(sk_o,m) \rightarrow  \sigma$</b>: It takes the original decryptor's private key $sk_o$ and the message $m$ in the message space as input and outputs the signature $\sigma$ for $m$.</li>
+                        Sign$(sk_o,m) \rightarrow  \sigma$</b>: It takes the original decryptor's private key $sk_o$ and the message $m$ in the message space as input and outputs the signature $\sigma$ for $m$.</li>
                         
                         <li><b>
-                        $Vrfy(pk_o,m,\sigma) \rightarrow 1/0$</b>: It takes the original decryptor's public key $pk_o$, the message $m$, and the signature $\sigma$ as input and outputs $1$ if $\sigma$ is a valid signature for $m$, or $0$ otherwise.</li>
+                        Vrfy$(pk_o,m,\sigma) \rightarrow 1/0$</b>: It takes the original decryptor's public key $pk_o$, the message $m$, and the signature $\sigma$ as input and outputs $1$ if $\sigma$ is a valid signature for $m$, or $0$ otherwise.</li>
                     
 
                 </ul>
@@ -105,12 +105,14 @@
         <section class="row" id="protocol">
             <h3 class="col-md-9 offset-md-1">Application in court scenario</h3>
             <div class="col-md-10 offset-md-1">
-                <img src="res/app.jpg" class="col-md-6 offset-md-3" style="width:3000px">
+                <!-- <img src="res/app.jpg" class="col-md-6 offset-md-3" style="width:3000px"> -->
+                <img src="res/app.jpg" class="col-md-11 offset-md-1" style="width:3000px">
+
             </div>
         </section>
 
         <section class="row" id="performance">
-            <h3 class="col-md-9 offset-md-1">Performance Evaluation</h3>
+            <h3 class="col-md-9 offset-md-1">Performance evaluation</h3>
             <div class="col-md-10 offset-md-1">
                 <img src="res/cost.jpg" class="col-md-6 offset-md-3">
             </div>
