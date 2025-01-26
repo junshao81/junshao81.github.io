@@ -3339,9 +3339,9 @@
 
 		@media screen and (min-width: 1681px) {
 
-			.posts article {
+			/*.posts article {
 				width: calc(20% - 6em);
-			}
+			}*/
 
 				.posts article:nth-last-child(1) {
 					margin-bottom: 1em;
@@ -3372,9 +3372,9 @@
 
 		@media screen and (max-width: 1680px) {
 
-			.posts article {
+			/*.posts article {
 				width: calc(20% - 6em);
-			}
+			}*/
 
 				.posts article:nth-last-child(1) {
 					margin-bottom: 1em;
@@ -3384,11 +3384,7 @@
 
 		@media screen and (min-width: 481px) and (max-width: 1680px) {
 
-			.posts article {
-				width: calc(20% - 6em);
-			}
-
-				.posts article:nth-last-child(1) {
+			.posts article:nth-last-child(1) {
 					margin-bottom: 1em;
 				}
 
