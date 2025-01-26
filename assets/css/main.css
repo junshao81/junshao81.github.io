@@ -3344,7 +3344,7 @@
 			}
 
 				.posts article:nth-last-child(1) {
-					margin-bottom: 6em;
+					margin-bottom: 1em;
 				}
 
 
@@ -3377,7 +3377,7 @@
 			}
 
 				.posts article:nth-last-child(1) {
-					margin-bottom: 6em;
+					margin-bottom: 1em;
 				}
 
 		}
@@ -3389,7 +3389,7 @@
 			}
 
 				.posts article:nth-last-child(1) {
-					margin-bottom: 6em;
+					margin-bottom: 1em;
 				}
 
 			/*.posts article:nth-child(2n + 1):before {
