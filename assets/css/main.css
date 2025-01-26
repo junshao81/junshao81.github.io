@@ -3662,6 +3662,20 @@
 			z-index: 10000;
 		}
 
+
+		#sidebar .toggle-button {
+		    display: none;
+		    position: absolute;
+		    top: 10px;
+		    left: -40px;
+		    background-color: #888;
+		    color: white;
+		    border: none;
+		    cursor: pointer;
+		    padding: 10px;
+		    z-index: 1000;
+		}
+
 			#sidebar .toggle:before {
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-font-smoothing: antialiased;
