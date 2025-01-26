@@ -3387,13 +3387,13 @@
 				margin-bottom: 0;
 			}
 
-				.posts article:nth-last-child(1):before, .posts article:nth-last-child(2):before {
+				/*.posts article:nth-last-child(1):before, .posts article:nth-last-child(2):before {
 					height: 100%;
 				}
 
 				.posts article:nth-last-child(1):after, .posts article:nth-last-child(2):after {
 					display: none;
-				}
+				}*/
 
 		}
 
